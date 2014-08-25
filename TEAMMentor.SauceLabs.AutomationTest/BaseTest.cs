@@ -54,6 +54,8 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             finally
             {
                 // terminate the remote webdriver session
+                _Driver.Close();
+                _Driver.Dispose();
                 _Driver.Quit();
             }
         }

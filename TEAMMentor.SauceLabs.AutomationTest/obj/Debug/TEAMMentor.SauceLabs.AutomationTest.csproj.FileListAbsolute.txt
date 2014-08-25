@@ -22,3 +22,4 @@ C:\Users\Michael Hidalgo\Desktop\TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.
 C:\Users\Michael Hidalgo\Desktop\TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\bin\Debug\Gallio.XmlSerializers.dll
 C:\Users\Michael Hidalgo\Desktop\TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\obj\Debug\TEAMMentor.SauceLabs.AutomationTest.dll
 C:\Users\Michael Hidalgo\Desktop\TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\obj\Debug\TEAMMentor.SauceLabs.AutomationTest.pdb
+C:\Users\Michael Hidalgo\Desktop\TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\obj\Debug\TEAMMentor.SauceLabs.AutomationTest.csprojResolveAssemblyReference.cache
