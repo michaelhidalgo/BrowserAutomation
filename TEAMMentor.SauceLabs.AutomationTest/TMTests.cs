@@ -8,7 +8,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
     public class TeamMentor : BaseTest
     {
         /// <summary>tests the title of the page</summary>
-        [Parallelizable, Test] // denotes that this method is a test and can be run in parallel
+        [MbUnit.Framework.Test, Parallelizable] // denotes that this method is a test and can be run in parallel
         public void TeamMentorPageTitleIsCorrect(string browser, string version, string platform)
         {
             // start the remote webdriver session with sauce labs
@@ -18,7 +18,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.Contains(_Driver.Title, "TeamMentor");
         }
         /// <summary>tests the title of the page</summary>
-        [Parallelizable, Test] // denotes that this method is a test and can be run in parallel
+        [Test,Parallelizable] // denotes that this method is a test and can be run in parallel
         public void DotNetLibrariesLoaded(string browser, string version, string platform)
         {
             // start the remote webdriver session with sauce labs
@@ -33,7 +33,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(nowShowingLabel== "Loaded 534 out of 534");
         }
 
-        [Parallelizable, Test]
+        [Test,Parallelizable]
         public void Login(String browser, string version, string platform)
         {
             _Setup(browser, version, platform);
@@ -57,7 +57,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(logPanel.Contains("mhidalgo"));
 
         }
-        [Parallelizable, Test]
+        [Test,Parallelizable]
         public void TbotisAvailable(string browser, string version, string platform)
         {
             _Setup(browser, version, platform);
@@ -81,7 +81,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(logPanel.Contains("TBot"));
 
         }
-        [Parallelizable, Test]
+         [Test,Parallelizable]
         public void SonyCustomizationWorksFine(string browser, string version, string platform)
         {
             _Setup(browser, version, platform);

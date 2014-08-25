@@ -67,22 +67,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-     <!-- AssemblyFile is the path to where Gallio is installed. -->
-<UsingTask AssemblyFile="C:\Program Files\Gallio\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" /> 
-<ItemGroup>
-<TestFile Include="bin\Debug\TestProject.dll" />
-</ItemGroup>
-          <!-- This is the target name that is referenced in the TeamCity job. -->
-<Target Name="RunTests">
-<Gallio IgnoreFailures="false" Files="@(TestFile)">
-	        <!-- This tells MSBuild to store the output value of the task's ExitCode property into the project's ExitCode property --> 
-      <Output TaskParameter="ExitCode" PropertyName="ExitCode"/> 
- </Gallio> 
- <Error Text="Tests execution failed" Condition="'$(ExitCode)' != 0" /> 
-  </Target>
   </Target>
   <Target Name="AfterBuild">
   </Target>
- 
+  -->
+  
 </Project>

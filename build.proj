@@ -1,0 +1,24 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+  <!-- This is needed by MSBuild to locate the Gallio task --> 
+  <UsingTask AssemblyFile="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\externals\Gallio.MSBuildTasks.dll" TaskName="Gallio" /> 
+  <!-- Specify the tests assemblies --> 
+  <ItemGroup> 
+    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" /> 
+  </ItemGroup> 
+  <Target Name="RunTests"> 
+    <Gallio IgnoreFailures="false" Assemblies="@(TestAssemblies)" 
+RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration"> 
+      <!-- This tells MSBuild to store the output value of the task's 
+ExitCode property 
+                             into the project's ExitCode property --> 
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode"/> 
+    </Gallio> 
+    <Error Text="Tests execution failed" Condition="'$(ExitCode)' != 
+0" /> 
+  </Target> 
+  <Target Name="Build"> 
+    <Message Text="Starting to Build"/> 
+    <MSBuild Projects="TEAMMentor.SauceLabs.AutomationTest.sln" 
+Properties="Configuration=Debug" /> 
+  </Target> 
+</Project>
