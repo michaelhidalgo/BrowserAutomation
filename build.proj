@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-<UsingTask AssemblyFile="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\externals\Gallio.MSBuildTasks.dll" TaskName="Gallio" />  
  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -65,10 +64,10 @@
     <Compile Include="TMTests.cs" />
   </ItemGroup>
  <!-- put this in csproj almost at the end in target section -->
-<UsingTask AssemblyFile="C:\BuildAgent\work\a7d880ef953007f3\TEAMMentor.SauceLabs.AutomationTest\externals\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+<UsingTask AssemblyFile="C:\Users\Michael Hidalgo\Downloads\GallioBundle-3.4.14.0\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 <ItemGroup>
-    <TestAssemblies Include="..\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
+    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
     <!-- put as many TestAssemblies as you want -->
 </ItemGroup>
 
