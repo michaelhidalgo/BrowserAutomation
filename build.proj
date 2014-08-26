@@ -64,7 +64,7 @@
     <Compile Include="TMTests.cs" />
   </ItemGroup>
  <!-- put this in csproj almost at the end in target section -->
-<UsingTask AssemblyFile="C:\Users\michael\Downloads\GallioBundle-3.4.14.0\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+<UsingTask AssemblyFile="C:\Program Files\Gallio\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 <ItemGroup>
     <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
