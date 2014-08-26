@@ -11,6 +11,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
     [Header("browser", "version", "platform")] // name of the parameters in the rows
     [Row("firefox", "25", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
     [Row("chrome", "31", "Windows 7")] // run all tests in the fixture against chrome 31 for windows 7
+    [Row("firefox", "25", "Windows 8.1")] // run all tests in the fixture against firefox 25 for windows 7
     public class BaseTest
     {
         protected IWebDriver _Driver;
