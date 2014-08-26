@@ -64,27 +64,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMTests.cs" />
   </ItemGroup>
-  <ItemGroup> 
-    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" /> 
-  </ItemGroup> 
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="RunTests"> 
-    <Gallio IgnoreFailures="false" Assemblies="@(TestAssemblies)" 
-RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration"> 
-      <!-- This tells MSBuild to store the output value of the task's 
-ExitCode property 
-                             into the project's ExitCode property --> 
-      <Output TaskParameter="ExitCode" PropertyName="ExitCode"/> 
-    </Gallio> 
-    <Error Text="Tests execution failed" Condition="'$(ExitCode)' != 
-0" /> 
-  </Target> 
-  <Target Name="Build"> 
-    <Message Text="Starting to Build"/> 
-    <MSBuild Projects="TEAMMentor.SauceLabs.AutomationTest.sln" 
-Properties="Configuration=Debug" /> 
-  </Target> 
+ <!-- put this in csproj almost at the end in target section -->
+<UsingTask AssemblyFile="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\externals\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+
+<ItemGroup>
+    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
+    <!-- put as many TestAssemblies as you want -->
+</ItemGroup>
+
+<!-- name of the target is important to rememver. You will use it in Team City Configuration -->
+<Target Name="RunTests"> 
+    <Gallio Files="@(TestAssemblies)" IgnoreFailures="false" ReportTypes="html" ShowReports="true">
+    <!-- This tells MSBuild to store the output value of the task's ExitCode property
+         into the project's ExitCode property -->
+        <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    <Error Text="Tests execution failed" Condition="'$(ExitCode)' != 0" />
+</Target>
 </Project>
