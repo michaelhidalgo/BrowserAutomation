@@ -65,10 +65,10 @@
     <Compile Include="TMTests.cs" />
   </ItemGroup>
  <!-- put this in csproj almost at the end in target section -->
-<UsingTask AssemblyFile="TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest\externals\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+<UsingTask AssemblyFile="..\externals\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 <ItemGroup>
-    <TestAssemblies Include="bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
+    <TestAssemblies Include="..\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
     <!-- put as many TestAssemblies as you want -->
 </ItemGroup>
 
