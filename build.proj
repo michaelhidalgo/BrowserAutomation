@@ -67,7 +67,7 @@
 <UsingTask AssemblyFile="C:\Program Files\Gallio\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 <ItemGroup>
-    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\bin\Debug\TEAMMentor.SauceLabs.AutomationTest.dll" />
+    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\bin\Release\TEAMMentor.SauceLabs.AutomationTest.dll" />
     <!-- put as many TestAssemblies as you want -->
 </ItemGroup>
 
