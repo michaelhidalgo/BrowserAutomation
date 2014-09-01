@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 namespace TEAMMentor.SauceLabs.AutomationTest
 {
-    [TestFixture]
+    [TestFixture,Parallelizable]
     public class TeamMentor : BaseTest
     {
         /// <summary>tests the title of the page</summary>
@@ -81,7 +81,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(logPanel.Contains("TBot"));
 
         }
-         [Test,Parallelizable]
+         [Test, Parallelizable]
         public void SonyCustomizationWorksFine(string browser, string version, string platform)
         {
             _Setup(browser, version, platform);

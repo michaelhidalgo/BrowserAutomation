@@ -71,7 +71,7 @@
     <!-- put as many TestAssemblies as you want -->
 </ItemGroup>
 
-<!-- name of the target is important to rememver. You will use it in Team City Configuration -->
+<!-- name of the target is important to remember. You will use it in Team City Configuration -->
 <Target Name="RunTests"> 
     <Gallio Files="@(TestAssemblies)" IgnoreFailures="false" ReportTypes="html" ShowReports="true">
     <!-- This tells MSBuild to store the output value of the task's ExitCode property

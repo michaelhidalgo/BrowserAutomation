@@ -1,7 +1,10 @@
-﻿using Gallio.Framework;
+﻿using System.IO;
+using System.Reflection;
+using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
 
@@ -20,18 +23,22 @@ namespace TEAMMentor.SauceLabs.AutomationTest
         /// <param name="platform">operating system to request</param>
         protected void _Setup(string browser, string version, string platform)
         {
-            // construct the url to sauce labs
-          var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
 
-            // set up the desired capabilities
-            var desiredCapabilites = new DesiredCapabilities(browser, version, Platform.CurrentPlatform); // set the desired browser
-            desiredCapabilites.SetCapability("platform", platform); // operating system to use
-            desiredCapabilites.SetCapability("username", Constants.SAUCE_LABS_ACCOUNT_NAME); // supply sauce labs username
-            desiredCapabilites.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);  // supply sauce labs account key
-            desiredCapabilites.SetCapability("name", "TEAM Mentor Build -" + TestContext.CurrentContext.Test.Name); // give the test a name
+            if (IsRunningFromTeamCity())
+            {
+                var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
 
-            // start a new remote web driver session on sauce labs
-            _Driver = new RemoteWebDriver(commandExecutorUri, desiredCapabilites);
+                var desiredCapabilites = new DesiredCapabilities(browser, version, Platform.CurrentPlatform);
+                desiredCapabilites.SetCapability("platform", platform); // operating system to use
+                desiredCapabilites.SetCapability("username", Constants.SAUCE_LABS_ACCOUNT_NAME);
+                desiredCapabilites.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);
+                desiredCapabilites.SetCapability("name", "TEAM Mentor Build -" + TestContext.CurrentContext.Test.Name);
+                _Driver = new RemoteWebDriver(commandExecutorUri, desiredCapabilites);
+            }
+            else
+            {
+                _Driver = new FirefoxDriver();
+            }
             _Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(30));
             _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(30));
 
@@ -48,8 +55,11 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             bool passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
             try
             {
-                // log the result to sauce labs
-                ((IJavaScriptExecutor)_Driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+                if (IsRunningFromTeamCity())
+                {
+                    // log the result to sauce labs
+                    ((IJavaScriptExecutor) _Driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+                }
             }
             finally
             {
@@ -58,6 +68,13 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             }
         }
 
-       
+        private static bool IsRunningFromTeamCity()
+        {
+            var assemblyLocation = Assembly.GetCallingAssembly().CodeBase;
+            var asemblyFullPath = Uri.EscapeUriString(assemblyLocation);
+            var assemblyDirectory = Path.GetDirectoryName(asemblyFullPath);
+            return assemblyDirectory!=null && assemblyDirectory.ToLowerInvariant().Contains(@"buildagent\work");
+        }
+
     }
 }
