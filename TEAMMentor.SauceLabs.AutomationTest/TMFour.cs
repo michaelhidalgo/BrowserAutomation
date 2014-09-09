@@ -35,7 +35,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(link.Text.Length > 0);
             link.Click();
             wait.Until(x => x.Url == "http://tm-node.azurewebsites.net/user/login/returning-user-login.html");
-
+            _Driver.FindElement(By.Id("new-user-username")).Clear();
             _Driver.FindElement(By.Id("new-user-username")).SendKeys("tm");
             _Driver.FindElement(By.Id("new-user-password")).SendKeys("tm");
 
