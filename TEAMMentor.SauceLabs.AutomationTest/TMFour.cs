@@ -8,7 +8,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
     [TestFixture, Parallelizable]
     public class TMFour : BaseTest
     {
-        [Test, Parallelizable]
+        [MbUnit.Framework.Test, Parallelizable]
         public void MainPageAskForLogin(string browser, string version, string platform)
         {
             base._Setup(browser, version, platform);
