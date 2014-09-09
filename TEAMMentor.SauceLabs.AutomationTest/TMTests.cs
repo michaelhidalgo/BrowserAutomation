@@ -8,7 +8,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
     public class TeamMentor : BaseTest
     {
         /// <summary>tests the title of the page</summary>
-        [MbUnit.Framework.Test, Parallelizable] // denotes that this method is a test and can be run in parallel
+        [MbUnit.Framework.Test, Parallelizable,Ignore] // denotes that this method is a test and can be run in parallel
         public void TeamMentorPageTitleIsCorrect(string browser, string version, string platform)
         {
             // start the remote webdriver session with sauce labs
@@ -18,7 +18,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.Contains(_Driver.Title, "TeamMentor");
         }
         /// <summary>tests the title of the page</summary>
-        [Test,Parallelizable] // denotes that this method is a test and can be run in parallel
+        [Test,Parallelizable,Ignore] // denotes that this method is a test and can be run in parallel
         public void DotNetLibrariesLoaded(string browser, string version, string platform)
         {
             // start the remote webdriver session with sauce labs
@@ -33,7 +33,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(nowShowingLabel== "Loaded 534 out of 534");
         }
 
-        [Test,Parallelizable]
+        [Test,Parallelizable,Ignore]
         public void Login(String browser, string version, string platform)
         {
             _Setup(browser, version, platform);
@@ -57,7 +57,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(logPanel.Contains("mhidalgo"));
 
         }
-        [Test,Parallelizable]
+        [Test,Parallelizable,Ignore]
         public void TbotisAvailable(string browser, string version, string platform)
         {
             _Setup(browser, version, platform);
@@ -81,7 +81,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(logPanel.Contains("TBot"));
 
         }
-         [Test, Parallelizable]
+        [Test, Parallelizable,Ignore]
         public void SonyCustomizationWorksFine(string browser, string version, string platform)
         {
             _Setup(browser, version, platform);

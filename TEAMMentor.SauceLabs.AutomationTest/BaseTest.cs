@@ -43,7 +43,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(30));
 
             // navigate to the page under test
-            _Driver.Navigate().GoToUrl("http://tmqa-dev.teammentor.net/teamMentor");
+            //_Driver.Navigate().GoToUrl("http://tmqa-dev.teammentor.net/teamMentor");
         }
 
 
