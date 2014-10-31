@@ -7,8 +7,8 @@
     <ProjectGuid>{F3EBAEA0-09DE-44B4-B1B8-D86580774046}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TEAMMentor.SauceLabs.AutomationTest</RootNamespace>
-    <AssemblyName>TEAMMentor.SauceLabs.AutomationTest</AssemblyName>
+    <RootNamespace>TEAMMentor.BrowserAutomation.Testt</RootNamespace>
+    <AssemblyName>TEAMMentor.BrowserAutomation.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -67,7 +67,7 @@
 <UsingTask AssemblyFile="C:\Program Files\Gallio\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 <ItemGroup>
-    <TestAssemblies Include="TEAMMentor.SauceLabs.AutomationTest\bin\Release\TEAMMentor.SauceLabs.AutomationTest.dll" />
+    <TestAssemblies Include="TEAMMentor.BrowserAutomation.Test\bin\Release\TEAMMentor.SauceLabs.AutomationTest.dll" />
     <!-- put as many TestAssemblies as you want -->
 </ItemGroup>
 
