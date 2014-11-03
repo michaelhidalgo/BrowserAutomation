@@ -40,8 +40,11 @@ namespace TEAMMentor.BrowserAutomation.Test
 
         private void LogOut()
         {
+            
+            var v = new WebDriverWait(_Driver, TimeSpan.FromSeconds(30));
+            v.Until(x=> x.FindElementEx(By.Id("topRightMenu")).Text.Contains("Logout"));
             var topMenu = _Driver.FindElementEx(By.Id("topRightMenu"));
-            Assert.IsTrue(topMenu.FindElement(By.LinkText("Logout")).Displayed);
+            Assert.IsTrue(topMenu.Text.Contains("Logout"));
         }
     }
 }
