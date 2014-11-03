@@ -10,7 +10,7 @@ namespace TEAMMentor.BrowserAutomation.Test
 {
     public static  class ExtensionMethods
     {
-        static readonly int timeoutInSeconds = 20;
+        static readonly int timeoutInSeconds = 30;
         public static  IWebElement FindElementEx(this IWebDriver driver , By by)
         {
             if (timeoutInSeconds > 0)
