@@ -18,16 +18,30 @@ namespace TEAMMentor.BrowserAutomation.Test
             _Setup(browser, version, platform);
             base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net/Teammentor");
             Login();
+            LogOut();
         }
 
         private void Login()
         {
-            var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
-            wait.Until(x => x.Title == "TEAM Mentor");
+            
             Assert.IsTrue(_Driver.Title == "TEAM Mentor");
-
-            var link = this._Driver.FindElement(By.LinkText("Login"));
+            var link = this._Driver.FindElementEx(By.LinkText("Login"));
+            link.Click();
+            //Caja de texto ha cargo.
+            var usrName = _Driver.FindElementEx(By.Id("UsernameBox"));
+            var password= _Driver.FindElementEx(By.Id("PasswordBox"));
+            usrName.SendKeys("");
+            usrName.SendKeys("admin");
+            password.SendKeys("");
+            password.SendKeys("!!tmadmin");
+            _Driver.FindElementEx(By.Id("loginButton")).Click();
             Assert.IsTrue(link.Text.Length > 0);
+        }
+
+        private void LogOut()
+        {
+            var topMenu = _Driver.FindElementEx(By.Id("topRightMenu"));
+            Assert.IsTrue(topMenu.FindElement(By.LinkText("Logout")).Displayed);
         }
     }
 }

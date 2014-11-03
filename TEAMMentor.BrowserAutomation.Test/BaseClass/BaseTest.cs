@@ -12,9 +12,8 @@ namespace TEAMMentor.BrowserAutomation.Test
 {
 
     [Header("browser", "version", "platform")] // name of the parameters in the rows
-    [Row("firefox", "25", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
-    [Row("chrome", "31", "Windows 7")] // run all tests in the fixture against chrome 31 for windows 7
-    [Row("firefox", "25", "Windows 8.1")] // run all tests in the fixture against firefox 25 for windows 7
+    [Row("firefox", "33", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
+    [Row("Chrome", "37", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
     public class BaseTest
     {
         protected IWebDriver _Driver;
@@ -25,8 +24,8 @@ namespace TEAMMentor.BrowserAutomation.Test
         protected void _Setup(string browser, string version, string platform)
         {
 
-            if (IsRunningFromTeamCity())
-            {
+            //if (IsRunningFromTeamCity())
+            //{
                 var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
 
                 var desiredCapabilites = new DesiredCapabilities(browser, version, Platform.CurrentPlatform);
@@ -35,15 +34,15 @@ namespace TEAMMentor.BrowserAutomation.Test
                 desiredCapabilites.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);
                 desiredCapabilites.SetCapability("name", "TEAM Mentor Build -" + TestContext.CurrentContext.Test.Name);
                 _Driver = new RemoteWebDriver(commandExecutorUri, desiredCapabilites);
-            }
-            else
-            {
-                _Driver = new FirefoxDriver();
-            }
-            _Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(30));
-            _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(30));
+            //}
+            //else
+            //{
+            //    _Driver = new FirefoxDriver();
+            //}
+            //_Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(30));
+            //_Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(30));
 
-            // navigate to the page under test
+            //// navigate to the page under test
             //_Driver.Navigate().GoToUrl("http://tmqa-dev.teammentor.net/teamMentor");
         }
 
@@ -56,11 +55,11 @@ namespace TEAMMentor.BrowserAutomation.Test
             bool passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
             try
             {
-                if (IsRunningFromTeamCity())
-                {
+                //if (IsRunningFromTeamCity())
+                //{
                     // log the result to sauce labs
                     ((IJavaScriptExecutor) _Driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-                }
+                //}
             }
             finally
             {
