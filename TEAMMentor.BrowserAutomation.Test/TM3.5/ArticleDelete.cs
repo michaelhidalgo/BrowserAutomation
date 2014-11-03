@@ -9,10 +9,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace TEAMMentor.BrowserAutomation.Test
 {
-    [TestFixture, Parallelizable]
+    [MbUnit.Framework.TestFixture, Parallelizable]
     public class ArticleDelete : BaseTest
     {
-        [Test, Parallelizable]
+        [MbUnit.Framework.Test, Parallelizable]
         public void MainPageAskForLogin(string browser, string version, string platform)
         {
             _Setup(browser, version, platform);
