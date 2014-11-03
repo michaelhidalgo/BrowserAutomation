@@ -30,17 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio">
-      <HintPath>..\..\..\Downloads\GallioBundle-3.4.14.0\bin\Gallio.dll</HintPath>
+    <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>externals\Gallio.dll</HintPath>
     </Reference>
-    <Reference Include="Gallio40">
-      <HintPath>..\..\..\Downloads\GallioBundle-3.4.14.0\bin\Gallio40.dll</HintPath>
+    <Reference Include="Gallio40, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>externals\Gallio40.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit">
-      <HintPath>..\..\..\Downloads\GallioBundle-3.4.14.0\bin\MbUnit.dll</HintPath>
+    <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>externals\MbUnit.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit40">
-      <HintPath>..\..\..\Downloads\GallioBundle-3.4.14.0\bin\MbUnit40.dll</HintPath>
+    <Reference Include="MbUnit40, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>externals\MbUnit40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,6 +73,14 @@
   <ItemGroup>
     <Folder Include="ExtensionMethods\" />
     <Folder Include="FlareTest\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="externals\Gallio.dll" />
+    <Content Include="externals\Gallio.MSBuildTasks.dll" />
+    <Content Include="externals\Gallio.MSBuildTasks.xml" />
+    <Content Include="externals\Gallio40.dll" />
+    <Content Include="externals\MbUnit.dll" />
+    <Content Include="externals\MbUnit40.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
