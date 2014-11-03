@@ -65,7 +65,7 @@
 <UsingTask AssemblyFile="C:\Program Files\Gallio\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 <ItemGroup>
-    <TestAssemblies Include="TEAMMentor.BrowserAutomation.Test\bin\Debug\TEAMMentor.BrowserAutomation.Test.dll" />
+    <TestAssemblies Include="TEAMMentor.BrowserAutomation.Test\bin\Release\TEAMMentor.BrowserAutomation.Test.dll" />
     <!-- put as many TestAssemblies as you want -->
 </ItemGroup>
   <ItemGroup>
