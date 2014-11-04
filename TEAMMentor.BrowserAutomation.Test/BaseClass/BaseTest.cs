@@ -13,7 +13,7 @@ namespace TEAMMentor.BrowserAutomation.Test
 
     [Header("browser", "version", "platform")] // name of the parameters in the rows
     [Row("firefox", "33", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
-    [Row("Chrome", "37", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
+   [Row("Chrome", "37", "Windows 7")] // run all tests in the fixture against firefox 25 for windows 7
     public class BaseTest
     {
         protected IWebDriver _Driver;
