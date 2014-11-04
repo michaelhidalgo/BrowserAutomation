@@ -18,6 +18,16 @@ namespace TEAMMentor.BrowserAutomation.Test
             _Setup(browser, version, platform);
             base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net/Teammentor");
             Login();
+            var articleCount = _Driver.FindElementWhenHasText(By.Id("nowShowingText"));
+            Assert.IsTrue(articleCount.Text== "Showing 370 items (out of 370)");
+
+            var topText = _Driver.FindElementWhenHasText(By.Id("topRightMenu"));
+            Assert.IsTrue(topText.Text.Contains("Edit Mode"));
+            _Driver.FindElementWhenHasText(By.LinkText("Edit Mode")).Click();
+
+            topText = _Driver.FindElementWhenHasText(By.Id("topRightMenu"));
+            Assert.IsTrue(topText.Text.Contains("Exit Edit Mode"));
+            _Driver.FindElementWhenHasText(By.LinkText("Exit Edit Mode")).Click();
             LogOut();
         }
 
