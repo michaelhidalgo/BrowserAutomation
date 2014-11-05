@@ -65,15 +65,14 @@
     <Compile Include="BaseClass\BaseTest.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\ExtensionMethods.cs" />
+    <Compile Include="FlareTest\LandingPageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TM3.5\ArticleDelete.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FlareTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="externals\Gallio.dll" />
     <Content Include="externals\Gallio.MSBuildTasks.dll" />
