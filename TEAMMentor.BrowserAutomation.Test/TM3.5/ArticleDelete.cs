@@ -30,6 +30,15 @@ namespace TEAMMentor.BrowserAutomation.Test
             var topText = _Driver.FindElementWhenHasText(By.Id("topRightMenu"));
             LogOut();
         }
+        [Test]
+        public void TMVersionChanged(string browser, string version, string platform)
+        {
+            _Setup(browser, version, platform);
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net/Teammentor");
+            var topText = _Driver.FindElementWhenHasText(By.Id("topRightMenu"));
+            Assert.IsTrue(topText.Text.Contains("TM 3.5.2"));
+
+        }
 
         private void Login()
         {
