@@ -47,6 +47,15 @@ namespace TEAMMentor.BrowserAutomation.Test
             Assert.IsTrue(String.Equals("Sign Up", links[4].Text, StringComparison.OrdinalIgnoreCase));
             Assert.IsTrue(String.Equals("Login", links[5].Text, StringComparison.OrdinalIgnoreCase));
         }
+        [Test]
+        public void CopyRightLegendIsAtTheBottom(string browser, string version, string platform)
+        {
+            _Setup(browser, version, platform);
+            var url = @"https://tm-4-design.herokuapp.com/landing-pages/index.html";
+            _Driver.Navigate().GoToUrl(url);
+            var banner = _Driver.FindElement(OpenQA.Selenium.By.ClassName("column-offset-2"));
+            Assert.IsTrue(banner.FindElements(OpenQA.Selenium.By.TagName("a")).Count == 1);
+        }
 
     }
 }

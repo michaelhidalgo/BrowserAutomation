@@ -13,6 +13,7 @@ namespace TEAMMentor.BrowserAutomation.Test
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeoutInSeconds));
                 return wait.Until(drv => drv.FindElement(@by));
         }
+
         public static IWebElement FindElementWhenHasText(this IWebDriver driver, By by)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeoutInSeconds));
