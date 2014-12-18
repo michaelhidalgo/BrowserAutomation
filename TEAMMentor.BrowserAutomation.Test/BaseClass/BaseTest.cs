@@ -14,6 +14,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
+using TEAMMentor.BrowserAutomation.Test;
 
 namespace TEAMMentor.SauceLabs.AutomationTest
 {
