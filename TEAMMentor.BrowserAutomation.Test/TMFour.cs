@@ -19,7 +19,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
         public void MainPageAskForLogin(string browser, string version, string platform)
         {
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-node.azurewebsites.net/home/main-app-view.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
             wait.Until(x => x.Title == "TEAM Mentor 4.0 (Html version)");
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
@@ -33,7 +33,7 @@ namespace TEAMMentor.SauceLabs.AutomationTest
         public void Login(string browser, string version, string platform)
         {
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-node.azurewebsites.net/home/main-app-view.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
             wait.Until(x => x.Title == "TEAM Mentor 4.0 (Html version)");
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
@@ -41,15 +41,15 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             var link = this._Driver.FindElement(By.LinkText("Login"));
             Assert.IsTrue(link.Text.Length > 0);
             link.Click();
-            wait.Until(x => x.Url == "http://tm-node.azurewebsites.net/user/login/returning-user-login.html");
+            wait.Until(x => x.Url == "http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
             _Driver.FindElement(By.Id("new-user-username")).Clear();
             _Driver.FindElement(By.Id("new-user-username")).SendKeys("tm");
             _Driver.FindElement(By.Id("new-user-password")).SendKeys("tm");
 
             _Driver.FindElement(By.Id("btn-login")).Click();
-            wait.Until(x => x.Url == "http://tm-node.azurewebsites.net/home/main-app-view.html");
+            wait.Until(x => x.Url == "http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
 
-            Assert.IsTrue(_Driver.Url == "http://tm-node.azurewebsites.net/home/main-app-view.html");
+            Assert.IsTrue(_Driver.Url == "http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
 
         }
 
