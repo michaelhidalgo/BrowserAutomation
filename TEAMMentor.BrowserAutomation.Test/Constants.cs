@@ -4,9 +4,9 @@
     internal static class Constants
     {
         /// <summary>name of the sauce labs account that will be used</summary>
-        internal const string SAUCE_LABS_ACCOUNT_NAME = "mhidalgocr";
+        internal const string SAUCE_LABS_ACCOUNT_NAME = "securityinnovation";
         /// <summary>account key for the sauce labs account that will be used</summary>
-        internal const string SAUCE_LABS_ACCOUNT_KEY = "73e17e46-9bc1-44f7-a46a-fed5104820b1";
+        internal const string SAUCE_LABS_ACCOUNT_KEY = "a1c1422c-89f0-4401-8413-61e462396e27";
 		
 	  
     }
