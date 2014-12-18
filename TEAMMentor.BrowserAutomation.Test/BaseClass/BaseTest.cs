@@ -48,8 +48,8 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             this._browser = browser;
             this._platform = platform;
             this._version = version;
-            if (!IsRunningFromTeamCity())
-            {
+            //if (!IsRunningFromTeamCity())
+            //{
                 var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
 
                 var desiredCapabilites = new DesiredCapabilities(browser, version, Platform.CurrentPlatform);
@@ -58,11 +58,11 @@ namespace TEAMMentor.SauceLabs.AutomationTest
                 desiredCapabilites.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);
                 desiredCapabilites.SetCapability("name", "TEAM Mentor Build -" + TestContext.CurrentContext.Test.Name);
                 _Driver = new RemoteWebDriver(commandExecutorUri, desiredCapabilites);
-            }
-            else
-            {
-                _Driver = new FirefoxDriver();
-            }
+            //}
+            //else
+            //{
+                //_Driver = new FirefoxDriver();
+            //}
             _Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(30));
             _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(30));
 
