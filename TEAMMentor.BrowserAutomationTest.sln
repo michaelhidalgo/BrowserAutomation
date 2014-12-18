@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEAMMentor.SauceLabs.AutomationTest", "TEAMMentor.SauceLabs.AutomationTest\TEAMMentor.SauceLabs.AutomationTest.csproj", "{F3EBAEA0-09DE-44B4-B1B8-D86580774046}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEAMMentor.BrowserAutomation.Test", "TEAMMentor.BrowserAutomation.Test\TEAMMentor.BrowserAutomation.Test.csproj", "{F3EBAEA0-09DE-44B4-B1B8-D86580774046}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
