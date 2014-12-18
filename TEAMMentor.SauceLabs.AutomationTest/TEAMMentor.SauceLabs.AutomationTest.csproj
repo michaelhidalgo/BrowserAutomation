@@ -30,6 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentSharp.CoreLib">
+      <HintPath>..\packages\FluentSharp.CoreLib.5.5.172\lib\net35\FluentSharp.CoreLib.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentSharp.Moq">
+      <HintPath>..\packages\FluentSharp.Moq.5.5.172\lib\net45\FluentSharp.Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentSharp.Web_3_5">
+      <HintPath>..\packages\FluentSharp.Web_3_5.5.5.172\lib\net35\FluentSharp.Web_3_5.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentSharp.Web_4_5">
+      <HintPath>..\packages\FluentSharp.Web_4_5.5.5.172\lib\net45\FluentSharp.Web_4_5.dll</HintPath>
+    </Reference>
     <Reference Include="Gallio">
       <HintPath>..\..\..\Downloads\GallioBundle-3.4.14.0\bin\Gallio.dll</HintPath>
     </Reference>
@@ -42,9 +54,13 @@
     <Reference Include="MbUnit40">
       <HintPath>..\..\..\Downloads\GallioBundle-3.4.14.0\bin\MbUnit40.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,8 +81,10 @@
     <Compile Include="TMTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

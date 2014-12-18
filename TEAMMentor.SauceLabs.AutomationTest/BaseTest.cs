@@ -1,5 +1,12 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Text;
+using System.Threading;
+using FluentSharp.CoreLib;
+using FluentSharp.Web;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
@@ -22,10 +29,25 @@ namespace TEAMMentor.SauceLabs.AutomationTest
         /// <param name="browser">name of the browser to request</param>
         /// <param name="version">version of the browser to request</param>
         /// <param name="platform">operating system to request</param>
+        /// 
+        public string _browser { get; set; }
+        public string _version { get; set; }
+        public string _platform { get; set; }
+        public bool  ShouldSaveScreenShoots { get; set; }
+
+        public BaseTest()
+        {
+            this._browser = string.Empty;
+            this._platform = String.Empty;
+            this._version = String.Empty;
+            this.ShouldSaveScreenShoots = false;
+        }
         protected void _Setup(string browser, string version, string platform)
         {
-
-            if (IsRunningFromTeamCity())
+            this._browser = browser;
+            this._platform = platform;
+            this._version = version;
+            if (!IsRunningFromTeamCity())
             {
                 var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
 
@@ -67,6 +89,8 @@ namespace TEAMMentor.SauceLabs.AutomationTest
                 // terminate the remote webdriver session
                 _Driver.Quit();
             }
+            if (this.ShouldSaveScreenShoots)
+                SaveScreenShot();
         }
 
         private static bool IsRunningFromTeamCity()
@@ -77,5 +101,64 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             return assemblyDirectory!=null && assemblyDirectory.ToLowerInvariant().Contains(@"buildagent\work");
         }
 
+        private string GetJsonResponse(string url)
+        {
+            using (var client = new WebClient())
+            {
+                string credentials =
+                    Convert.ToBase64String(
+                        Encoding.ASCII.GetBytes(Constants.SAUCE_LABS_ACCOUNT_NAME +":"+Constants.SAUCE_LABS_ACCOUNT_KEY));
+                client.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
+                var response = client.DownloadString(url);
+                return response;
+            }
+        }
+
+        private void SavePngImage(string fileName, string url)
+        {
+            using (var client = new WebClient())
+            {
+                string credentials =
+                    Convert.ToBase64String(
+                        Encoding.ASCII.GetBytes(Constants.SAUCE_LABS_ACCOUNT_NAME + ":" + Constants.SAUCE_LABS_ACCOUNT_KEY));
+                client.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
+                byte[] imageResponse = client.DownloadData(url);
+
+                System.IO.File.WriteAllBytes(fileName, imageResponse);
+            }
+        }
+        private void SaveScreenShot()
+        {
+            var jobUrl = String.Format(@"https://saucelabs.com/rest/v1/{0}/jobs?limit=1", Constants.SAUCE_LABS_ACCOUNT_NAME);
+            var jobId = GetJsonResponse(jobUrl);
+            var response = jobId.json_Deserialize();
+         
+            var record = ((Object[])response).FirstOrDefault();
+            var dic = record as Dictionary<string, object>;
+            var id= dic.Values.FirstOrDefault();
+            Assert.IsTrue(id.ToString().isGuid());
+            Thread.Sleep(5000);
+            //Getting the job
+            jobUrl = String.Format(@"https://saucelabs.com/rest/v1/{0}/jobs/{1}/assets", Constants.SAUCE_LABS_ACCOUNT_NAME, id);
+            var jobDetails = GetJsonResponse(jobUrl);
+            var images = jobDetails.json_Deserialize() as Dictionary<string, object>;
+            var list = images.value("screenshots") as Object [];
+            int index = 0;
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Screnshots");
+            if (!System.IO.Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            foreach (var value in list)
+            {
+                TestLog.WriteLine(value);
+                var imageUrl = String.Format(@"https://saucelabs.com/rest/v1/{0}/jobs/{1}/assets/{2}", Constants.SAUCE_LABS_ACCOUNT_NAME, id,value);
+                string fileName = Path.Combine(path, string.Format(@"{0}_{1}_{2}_{3}_{4}.png", _browser, _version, _platform, TestContext.CurrentContext.Test.Name, index).ToString());
+                SavePngImage(fileName, imageUrl);
+                TestLog.WriteLine(fileName);
+                index ++;
+            }
+
+
+        }
     }
 }
