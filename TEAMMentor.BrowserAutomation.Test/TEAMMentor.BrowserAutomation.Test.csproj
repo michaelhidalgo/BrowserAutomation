@@ -75,7 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClass\BaseTest.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\ExtensionMethods.cs" />
     <Compile Include="FlareTest\LandingPageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

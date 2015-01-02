@@ -48,14 +48,19 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             this._browser = browser;
             this._platform = platform;
             this._version = version;
+            var fullPath = @"C:\temp\access\access.txt";
+            var text = System.IO.File.ReadAllText(fullPath);
+            var plainText = text.Split(':').ToList();
+            var userName = plainText.First();
+            var accesKey = plainText.LastOrDefault();
             //if (!IsRunningFromTeamCity())
             //{
-                var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
+            var commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
 
                 var desiredCapabilites = new DesiredCapabilities(browser, version, Platform.CurrentPlatform);
                 desiredCapabilites.SetCapability("platform", platform); // operating system to use
-                desiredCapabilites.SetCapability("username", Constants.SAUCE_LABS_ACCOUNT_NAME);
-                desiredCapabilites.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);
+                desiredCapabilites.SetCapability("username", userName);
+                desiredCapabilites.SetCapability("accessKey",accesKey);
                 desiredCapabilites.SetCapability("name", "TEAM Mentor Build -" + TestContext.CurrentContext.Test.Name);
                 _Driver = new RemoteWebDriver(commandExecutorUri, desiredCapabilites);
             //}
@@ -79,18 +84,12 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             bool passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
             try
             {
-                if (IsRunningFromTeamCity())
-                {
                     // log the result to sauce labs
                     ((IJavaScriptExecutor) _Driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-                }
             }
             finally
             {
-                if (this.ShouldSaveScreenShoots)
-                    SaveScreenShot();
-                // terminate the remote webdriver session
-                _Driver.Quit();
+                _Driver.Quit();  
             }
           
         }
@@ -103,90 +102,8 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             return assemblyDirectory!=null && assemblyDirectory.ToLowerInvariant().Contains(@"buildagent\work");
         }
 
-        private string GetJsonResponse(string url)
-        {
-            using (var client = new WebClient())
-            {
-                string credentials =
-                    Convert.ToBase64String(
-                        Encoding.ASCII.GetBytes(Constants.SAUCE_LABS_ACCOUNT_NAME +":"+Constants.SAUCE_LABS_ACCOUNT_KEY));
-                client.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
-                var response = client.DownloadString(url);
-                return response;
-            }
-        }
+      
 
-        private void SavePngImage(string fileName, string url)
-        {
-            using (var client = new WebClient())
-            {
-                string credentials =
-                    Convert.ToBase64String(
-                        Encoding.ASCII.GetBytes(Constants.SAUCE_LABS_ACCOUNT_NAME + ":" + Constants.SAUCE_LABS_ACCOUNT_KEY));
-                client.Headers[HttpRequestHeader.Authorization] = "Basic " + credentials;
-                byte[] imageResponse = client.DownloadData(url);
-
-                System.IO.File.WriteAllBytes(fileName, imageResponse);
-            }
-        }
-        private void SaveScreenShot()
-        {
-            var jobUrl = String.Format(@"https://saucelabs.com/rest/v1/{0}/jobs?limit=1", Constants.SAUCE_LABS_ACCOUNT_NAME);
-            var jobId = GetJsonResponse(jobUrl);
-            var response = jobId.json_Deserialize();
-         
-            var record = ((Object[])response).FirstOrDefault();
-            var dic = record as Dictionary<string, object>;
-            var id= dic.Values.FirstOrDefault();
-            var jobFinished = JobFinished(id.ToString());
-            if (jobFinished)
-            {
-                Assert.IsTrue(id.ToString().isGuid());
-                jobUrl = String.Format(@"https://saucelabs.com/rest/v1/{0}/jobs/{1}/assets",
-                    Constants.SAUCE_LABS_ACCOUNT_NAME, id);
-                var jobDetails = GetJsonResponse(jobUrl);
-                var images = jobDetails.json_Deserialize() as Dictionary<string, object>;
-                var list = images.value("screenshots") as Object[];
-                int index = 0;
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Screnshots");
-                if (!System.IO.Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
-                foreach (var value in list)
-                {
-                    TestLog.WriteLine(value);
-                    var imageUrl = String.Format(@"https://saucelabs.com/rest/v1/{0}/jobs/{1}/assets/{2}",
-                        Constants.SAUCE_LABS_ACCOUNT_NAME, id, value);
-                    string fileName = Path.Combine(path,
-                        string.Format(@"{0}_{1}_{2}_{3}_{4}.png", _browser, _version, _platform,
-                            TestContext.CurrentContext.Test.Name, index).ToString());
-                    SavePngImage(fileName, imageUrl);
-                    TestLog.WriteLine(fileName);
-                    index ++;
-                }
-            }
-        }
-
-        private bool JobFinished(string jobId)
-        {
-            bool finished = false;
-            var url = String.Format("https://saucelabs.com/rest/v1/{0}/jobs/{1}", Constants.SAUCE_LABS_ACCOUNT_NAME,jobId);
-            var response = GetJsonResponse(url);
-            var n = response.json_Deserialize();
-            var dic = (Dictionary<string, object>)n;
-            var status = dic.FirstOrDefault(x => x.Key == "status").Value.ToString();
-            finished = status == "complete";
-            TestLog.WriteLine(response);
-            while (!finished)
-            {
-                response = GetJsonResponse(url);
-                n = response.json_Deserialize();
-                dic = (Dictionary<string, object>)n;
-                status = dic.FirstOrDefault(x => x.Key == "status").Value.ToString();
-                finished = status == "complete";
-                Thread.Sleep(1000);
-            }
-            return finished;
-        }
+        
     }
 }

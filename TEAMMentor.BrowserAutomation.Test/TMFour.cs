@@ -19,12 +19,12 @@ namespace TEAMMentor.SauceLabs.AutomationTest
         public void MainPageAskForLogin(string browser, string version, string platform)
         {
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/");
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
             wait.Until(x => x.Title == "TEAM Mentor 4.0 (Html version)");
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
-            var link = this._Driver.FindElement(By.LinkText("Login"));
+            var link = this._Driver.FindElement(By.LinkText("LOGIN"));
             Assert.IsTrue(link.Text.Length > 0);
 
         }
@@ -33,32 +33,32 @@ namespace TEAMMentor.SauceLabs.AutomationTest
         public void Login(string browser, string version, string platform)
         {
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/");
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
             wait.Until(x => x.Title == "TEAM Mentor 4.0 (Html version)");
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
-            var link = this._Driver.FindElement(By.LinkText("Login"));
+            var link = this._Driver.FindElement(By.PartialLinkText("LOGIN"));
             Assert.IsTrue(link.Text.Length > 0);
             link.Click();
-            wait.Until(x => x.Url == "http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
+            wait.Until(x => x.Url == "http://tm-dev-01.teammentor.net:1337/guest/login.html");
             _Driver.FindElement(By.Id("new-user-username")).Clear();
             _Driver.FindElement(By.Id("new-user-username")).SendKeys("tm");
             _Driver.FindElement(By.Id("new-user-password")).SendKeys("tm");
 
             _Driver.FindElement(By.Id("btn-login")).Click();
-            wait.Until(x => x.Url == "http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
+            wait.Until(x => x.Url == "http://tm-dev-01.teammentor.net:1337/user/main.html");
 
-            Assert.IsTrue(_Driver.Url == "http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
+            Assert.IsTrue(_Driver.Url == "http://tm-dev-01.teammentor.net:1337/user/main.html");
 
         }
 
-        [MbUnit.Framework.Test, Parallelizable]
+        [MbUnit.Framework.Test,]
         public void LoginPage_BrowserResize_600X600(string browser, string version, string platform)
         {
-            base.ShouldSaveScreenShoots = true;
+         
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/guest/login.html");
             var p = new Point {X= 600, Y =600};
             _Driver.Manage().Window.Size = new Size(p);
 
@@ -67,15 +67,14 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
             wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
-            wait.Until(x => x.FindElement(By.Id("login")).Text.Length > 0);
+            wait.Until(x => x.FindElement(By.Id("loginwall")).Text.Length > 0);
 
         }
-        [MbUnit.Framework.Test, Parallelizable]
+        [MbUnit.Framework.Test]
         public void LoginPage_BrowserResize500X500(string browser, string version, string platform)
         {
-            base.ShouldSaveScreenShoots = true;
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/guest/login.html");
             var p = new Point { X = 500, Y = 500 };
             _Driver.Manage().Window.Size = new Size(p);
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
@@ -83,15 +82,15 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
             wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
-            wait.Until(x => x.FindElement(By.Id("login")).Text.Length > 0);
+            wait.Until(x => x.FindElement(By.Id("loginwall")).Text.Length > 0);
 
         }
-        [MbUnit.Framework.Test, Parallelizable]
+        [MbUnit.Framework.Test]
         public void LoginPage_BrowserResize300X400(string browser, string version, string platform)
         {
-            base.ShouldSaveScreenShoots = true;
+            //base.ShouldSaveScreenShoots = true;
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/guest/login.html");
             var p = new Point { X = 300, Y = 400 };
             _Driver.Manage().Window.Size = new Size(p);
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
@@ -99,16 +98,16 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
             wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
-            wait.Until(x => x.FindElement(By.Id("login")).Text.Length > 0);
+            wait.Until(x => x.FindElement(By.Id("loginwall")).Text.Length > 0);
 
         }
 
-        [MbUnit.Framework.Test, Parallelizable]
+        [MbUnit.Framework.Test]
         public void LoginPage_BrowserResize300X500(string browser, string version, string platform)
         {
-            base.ShouldSaveScreenShoots = true;
+            //base.ShouldSaveScreenShoots = true;
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/guest/login.html");
             var p = new Point { X = 300, Y = 500 };
             _Driver.Manage().Window.Size = new Size(p);
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
@@ -116,17 +115,17 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
             wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
-            wait.Until(x => x.FindElement(By.Id("login")).Text.Length > 0);
+            wait.Until(x => x.FindElement(By.Id("loginwall")).Text.Length > 0);
 
        
         }
 
-        [MbUnit.Framework.Test, Parallelizable]
+        [MbUnit.Framework.Test]
         public void LoginPage_BrowserResize200X200(string browser, string version, string platform)
         {
-            base.ShouldSaveScreenShoots = true;
+            //base.ShouldSaveScreenShoots = true;
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/user/login/returning-user-login.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/guest/login.html");
             var p = new Point { X = 200, Y = 200 };
             _Driver.Manage().Window.Size = new Size(p);
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
@@ -134,16 +133,16 @@ namespace TEAMMentor.SauceLabs.AutomationTest
             Assert.IsTrue(_Driver.Title == "TEAM Mentor 4.0 (Html version)");
 
             wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
-            wait.Until(x => x.FindElement(By.Id("login")).Text.Length > 0);
-
+            wait.Until(x => x.FindElement(By.Id("loginwall")).Text.Length > 0);
+           
 
         }
-        [MbUnit.Framework.Test, Parallelizable]
+        [MbUnit.Framework.Test]
         public void TMMainView_BrowserResize200X200(string browser, string version, string platform)
         {
-            base.ShouldSaveScreenShoots = true;
+ 
             base._Setup(browser, version, platform);
-            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337/home/main-app-view.html");
+            base._Driver.Navigate().GoToUrl("http://tm-dev-01.teammentor.net:1337");
             var p = new Point { X = 200, Y = 200 };
             _Driver.Manage().Window.Size = new Size(p);
             var wait = new WebDriverWait(this._Driver, TimeSpan.FromSeconds(30));
